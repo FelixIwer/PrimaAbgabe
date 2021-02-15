@@ -12,7 +12,9 @@ var TheNextBigWave;
         TheNextBigWave.game.appendChild(new TheNextBigWave.BackgroundPicture("BackgroundPicture"));
         //Camera Setup
         let cmpCamera = new fudge.ComponentCamera();
-        cmpCamera.backgroundColor = ƒ.Color.CSS("darkblue");
+        // cmpCamera.backgroundColor = ƒ.Color.CSS("darkblue");
+        cmpCamera.pivot.translateZ(1);
+        cmpCamera.pivot.rotateY(180);
         //Viewport Setup
         TheNextBigWave.viewport = new fudge.Viewport();
         TheNextBigWave.viewport.initialize("Viewport", TheNextBigWave.game, cmpCamera, canvas);

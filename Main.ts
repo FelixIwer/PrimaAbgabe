@@ -21,8 +21,10 @@ namespace TheNextBigWave {
 
         //Camera Setup
         let cmpCamera: fudge.ComponentCamera = new fudge.ComponentCamera();
-        cmpCamera.backgroundColor = ƒ.Color.CSS("darkblue");
-        
+        // cmpCamera.backgroundColor = ƒ.Color.CSS("darkblue");
+        cmpCamera.pivot.translateZ(1);
+        cmpCamera.pivot.rotateY(180);
+
 
         //Viewport Setup
         viewport = new fudge.Viewport();

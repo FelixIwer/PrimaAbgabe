@@ -5,8 +5,7 @@ namespace TheNextBigWave {
     export enum ACTION {
         IDLE = "Idle",
         WALK = "Walk",
-        JUMP = "Jump",
-        USE = "Use"
+        JUMP = "Jump"
       }
 
     export class Player extends fudge.Node {
@@ -36,7 +35,7 @@ namespace TheNextBigWave {
 
             movementMethod = "Idle";
             sprite = new fudgeaid.SpriteSheetAnimation(movementMethod, _coat);
-            sprite.generateByGrid(fudge.Rectangle.GET(4, 5, 36, 39), 1, 8, fudge.ORIGIN2D.BOTTOMCENTER, fudge.Vector2.X(10));
+            sprite.generateByGrid(fudge.Rectangle.GET(4, 5, 36, 39), 1, 200, fudge.ORIGIN2D.BOTTOMCENTER, fudge.Vector2.X(10));
             this.spriteAnimation[movementMethod] = sprite;
     
           }

@@ -3,7 +3,7 @@ namespace TheNextBigWave {
     import fudge = FudgeCore;
 
     export class BackgroundPicture extends fudge.Node {
-        private static mQuad: fudge.MeshQuad = new fudge.MeshQuad();
+        private static readonly mQuad: fudge.MeshQuad = new fudge.MeshQuad();
         private static txtBackgroundPicture: fudge.TextureImage = new fudge.TextureImage("./Screens/Ocean.png");
 
         public constructor (_name: string) {
