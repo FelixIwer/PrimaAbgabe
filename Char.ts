@@ -26,6 +26,7 @@ namespace TheNextBigWave {
             this.sprite.setAnimation(<fudgeaid.SpriteSheetAnimation>Player.spriteAnimation["Idle"]);
 
             this.addComponent(new fudge.ComponentTransform());
+            this.cmpTransform.local.rotateZ(15);
             this.appendChild(this.sprite);
         }
 

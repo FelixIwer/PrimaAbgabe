@@ -6,6 +6,8 @@ var TheNextBigWave;
     async function MainGame(_event) {
         const canvas = document.querySelector("canvas");
         TheNextBigWave.game = new fudge.Node("Game");
+        TheNextBigWave.world = new TheNextBigWave.World("World");
+        TheNextBigWave.game.addChild(TheNextBigWave.world);
         await createPlayerSpriteSheet();
         TheNextBigWave.player = new TheNextBigWave.Player("Player");
         TheNextBigWave.game.addChild(TheNextBigWave.player);
@@ -36,7 +38,7 @@ var TheNextBigWave;
     }
     async function createEnemySpriteSheet() {
         let txtEnemy = new fudge.TextureImage();
-        await txtEnemy.load("./Screens/Enemy.png");
+        await txtEnemy.load("./Screens/Enemys.png");
         let coatSprite = new fudge.CoatTextured(null, txtEnemy);
         TheNextBigWave.Enemy.generateSprites(coatSprite);
     }

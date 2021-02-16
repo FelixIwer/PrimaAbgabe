@@ -20,6 +20,7 @@ var TheNextBigWave;
             //this.sprite.mtxLocal.translateZ(0.1);
             this.sprite.setAnimation(Player.spriteAnimation["Idle"]);
             this.addComponent(new fudge.ComponentTransform());
+            this.cmpTransform.local.rotateZ(15);
             this.appendChild(this.sprite);
         }
         static generateSprites(_coat) {
