@@ -9,6 +9,9 @@ var TheNextBigWave;
         await createPlayerSpriteSheet();
         TheNextBigWave.player = new TheNextBigWave.Player("Player");
         TheNextBigWave.game.addChild(TheNextBigWave.player);
+        await createEnemySpriteSheet();
+        TheNextBigWave.enemy = new TheNextBigWave.Enemy("Enemy");
+        TheNextBigWave.game.addChild(TheNextBigWave.enemy);
         TheNextBigWave.game.appendChild(new TheNextBigWave.BackgroundPicture("BackgroundPicture"));
         //Camera Setup
         let cmpCamera = new fudge.ComponentCamera();
@@ -30,6 +33,12 @@ var TheNextBigWave;
         await txtPlayer.load("./Screens/Surfer.png");
         let coatSprite = new fudge.CoatTextured(null, txtPlayer);
         TheNextBigWave.Player.generateSprites(coatSprite);
+    }
+    async function createEnemySpriteSheet() {
+        let txtEnemy = new fudge.TextureImage();
+        await txtEnemy.load("./Screens/Enemy.png");
+        let coatSprite = new fudge.CoatTextured(null, txtEnemy);
+        TheNextBigWave.Enemy.generateSprites(coatSprite);
     }
 })(TheNextBigWave || (TheNextBigWave = {}));
 //# sourceMappingURL=Main.js.map

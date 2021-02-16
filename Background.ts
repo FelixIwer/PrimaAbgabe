@@ -1,5 +1,4 @@
 namespace TheNextBigWave {
-
     import fudge = FudgeCore;
 
     export class BackgroundPicture extends fudge.Node {

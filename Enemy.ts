@@ -2,20 +2,12 @@ namespace TheNextBigWave {
     import fudge = FudgeCore;
     import fudgeaid = FudgeAid;
 
-    export enum ACTION {
-        IDLE = "Idle",
-        WALK = "Walk",
-        JUMP = "Jump"
-      }
-
-    export class Player extends fudge.Node {
-
+    export class Enemy extends fudge.Node {
+        
         private static spriteAnimation: fudgeaid.SpriteSheetAnimations;
         private sprite: fudgeaid.NodeSprite;
 
-        private action: ACTION = ACTION.IDLE;
-
-        constructor(_name: string = "Player") {
+        public constructor (_name: string) {
             super(_name);
 
             this.sprite = new fudgeaid.NodeSprite("Sprite");
@@ -23,10 +15,7 @@ namespace TheNextBigWave {
             //this.sprite.mtxLocal.translateY(-_size.y / 2);
             //this.sprite.framerate = 7;
             //this.sprite.mtxLocal.translateZ(0.1);
-            this.sprite.setAnimation(<fudgeaid.SpriteSheetAnimation>Player.spriteAnimation["Idle"]);
-
-            this.addComponent(new fudge.ComponentTransform());
-            this.appendChild(this.sprite);
+            this.sprite.setAnimation(<fudgeaid.SpriteSheetAnimation>Enemy.spriteAnimation["Idle"]);
         }
 
         public static generateSprites(_coat: fudge.CoatTextured): void {
