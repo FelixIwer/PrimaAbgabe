@@ -9,6 +9,7 @@ namespace TheNextBigWave {
     export let player: Player;
     export let enemy: Enemy;
     export let world: World;
+    export let waves: Waves;
 
     async function MainGame(_event: Event): Promise<void> {
         const canvas: HTMLCanvasElement = document.querySelector("canvas");
@@ -21,15 +22,15 @@ namespace TheNextBigWave {
         game = new fudge.Node("Game");
 
         world = new World("World");
-        game.addChild(world);
+        game.appendChild(world);
 
         await createPlayerSpriteSheet();
         player = new Player("Player");
-        game.addChild(player);
+        game.appendChild(player);
 
         await createEnemySpriteSheet();
         enemy = new Enemy("Enemy");
-        game.addChild(enemy);
+        game.appendChild(enemy);
 
         game.appendChild(new BackgroundPicture("BackgroundPicture"));
 
@@ -65,5 +66,5 @@ namespace TheNextBigWave {
         await txtEnemy.load("./Screens/Enemys.png");
         let coatSprite: fudge.CoatTextured = new fudge.CoatTextured(null, txtEnemy);
         Enemy.generateSprites(coatSprite);
-    }
+    }    
 }

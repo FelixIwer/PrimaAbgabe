@@ -13,11 +13,12 @@ namespace TheNextBigWave {
             this.createWaves(wave);
         }
 
-        public createWaves(_waves: Waves): void {
+        private createWaves(_waves: Waves): void {
             let floorDistance: number = 0;
 
             for (let index: number = 0; index < 9; index++) {
                 _waves = new Waves("Waves", floorDistance);
+                
                 floorDistance += 0.36;
 
                 this.appendChild(_waves);

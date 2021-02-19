@@ -10,13 +10,13 @@ var TheNextBigWave;
         document.addEventListener("keyup", TheNextBigWave.handleSound);
         TheNextBigWave.game = new fudge.Node("Game");
         TheNextBigWave.world = new TheNextBigWave.World("World");
-        TheNextBigWave.game.addChild(TheNextBigWave.world);
+        TheNextBigWave.game.appendChild(TheNextBigWave.world);
         await createPlayerSpriteSheet();
         TheNextBigWave.player = new TheNextBigWave.Player("Player");
-        TheNextBigWave.game.addChild(TheNextBigWave.player);
+        TheNextBigWave.game.appendChild(TheNextBigWave.player);
         await createEnemySpriteSheet();
         TheNextBigWave.enemy = new TheNextBigWave.Enemy("Enemy");
-        TheNextBigWave.game.addChild(TheNextBigWave.enemy);
+        TheNextBigWave.game.appendChild(TheNextBigWave.enemy);
         TheNextBigWave.game.appendChild(new TheNextBigWave.BackgroundPicture("BackgroundPicture"));
         //Camera Setup
         let cmpCamera = new fudge.ComponentCamera();
