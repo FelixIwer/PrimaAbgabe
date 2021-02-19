@@ -3,12 +3,6 @@ namespace TheNextBigWave {
 
     window.addEventListener("load", MainGame);
 
-    interface KeyPressed {
-        [code: string]: boolean;
-      }
-      
-    let keysPressed: KeyPressed = {};
-
     export let viewport: fudge.Viewport;
 
     export let game: fudge.Node;
@@ -19,6 +13,11 @@ namespace TheNextBigWave {
     async function MainGame(_event: Event): Promise<void> {
         const canvas: HTMLCanvasElement = document.querySelector("canvas");
 
+        Sound.init();
+
+        document.addEventListener("keydown", handleSound);
+        document.addEventListener("keyup", handleSound);
+        
         game = new fudge.Node("Game");
 
         world = new World("World");
@@ -44,9 +43,6 @@ namespace TheNextBigWave {
         viewport = new fudge.Viewport();
         viewport.initialize("Viewport", game, cmpCamera, canvas);
 
-        document.addEventListener("keydown", handleKeyboard);
-        document.addEventListener("keyup", handleKeyboard);
-
         fudge.Loop.addEventListener(fudge.EVENT.LOOP_FRAME, update);
         fudge.Loop.start(fudge.LOOP_MODE.TIME_GAME, 60);
         viewport.draw();
@@ -59,7 +55,7 @@ namespace TheNextBigWave {
 
     async function createPlayerSpriteSheet(): Promise<void> {
         let txtPlayer: fudge.TextureImage = new fudge.TextureImage();
-        await txtPlayer.load("./Screens/Surfer.png");
+        await txtPlayer.load("./Screens/SurferBoy.png");
         let coatSprite: fudge.CoatTextured = new fudge.CoatTextured(null, txtPlayer);
         Player.generateSprites(coatSprite);
     }
@@ -69,28 +65,5 @@ namespace TheNextBigWave {
         await txtEnemy.load("./Screens/Enemys.png");
         let coatSprite: fudge.CoatTextured = new fudge.CoatTextured(null, txtEnemy);
         Enemy.generateSprites(coatSprite);
-    }
-
-    function handleKeyboard(_event: KeyboardEvent): void {
-        keysPressed[_event.code] = (_event.type == "keydown");
-    }
-
-    function processInput(): void {
-        if (keysPressed[fudge.KEYBOARD_CODE.A]) {
-            player.act(ACTION.WALK, DIRECTION.LEFT);
-            return;
-        }
-
-        if (keysPressed[fudge.KEYBOARD_CODE.D]) {
-            player.act(ACTION.WALK, DIRECTION.RIGHT);
-            return;
-        }
-
-        if (keysPressed[fudge.KEYBOARD_CODE.W]) {
-            player.act(ACTION.JUMP);
-            return;  
-        }
-
-        player.act(ACTION.IDLE);
     }
 }

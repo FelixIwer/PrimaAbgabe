@@ -3,9 +3,11 @@ var TheNextBigWave;
 (function (TheNextBigWave) {
     var fudge = FudgeCore;
     window.addEventListener("load", MainGame);
-    let keysPressed = {};
     async function MainGame(_event) {
         const canvas = document.querySelector("canvas");
+        TheNextBigWave.Sound.init();
+        document.addEventListener("keydown", TheNextBigWave.handleSound);
+        document.addEventListener("keyup", TheNextBigWave.handleSound);
         TheNextBigWave.game = new fudge.Node("Game");
         TheNextBigWave.world = new TheNextBigWave.World("World");
         TheNextBigWave.game.addChild(TheNextBigWave.world);
@@ -24,19 +26,17 @@ var TheNextBigWave;
         //Viewport Setup
         TheNextBigWave.viewport = new fudge.Viewport();
         TheNextBigWave.viewport.initialize("Viewport", TheNextBigWave.game, cmpCamera, canvas);
-        document.addEventListener("keydown", handleKeyboard);
-        document.addEventListener("keyup", handleKeyboard);
         fudge.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, update);
         fudge.Loop.start(fudge.LOOP_MODE.TIME_GAME, 60);
         TheNextBigWave.viewport.draw();
     }
     function update(_event) {
-        processInput();
+        TheNextBigWave.processInput();
         TheNextBigWave.viewport.draw();
     }
     async function createPlayerSpriteSheet() {
         let txtPlayer = new fudge.TextureImage();
-        await txtPlayer.load("./Screens/Surfer.png");
+        await txtPlayer.load("./Screens/SurferBoy.png");
         let coatSprite = new fudge.CoatTextured(null, txtPlayer);
         TheNextBigWave.Player.generateSprites(coatSprite);
     }
@@ -45,24 +45,6 @@ var TheNextBigWave;
         await txtEnemy.load("./Screens/Enemys.png");
         let coatSprite = new fudge.CoatTextured(null, txtEnemy);
         TheNextBigWave.Enemy.generateSprites(coatSprite);
-    }
-    function handleKeyboard(_event) {
-        keysPressed[_event.code] = (_event.type == "keydown");
-    }
-    function processInput() {
-        if (keysPressed[fudge.KEYBOARD_CODE.A]) {
-            TheNextBigWave.player.act(TheNextBigWave.ACTION.WALK, TheNextBigWave.DIRECTION.LEFT);
-            return;
-        }
-        if (keysPressed[fudge.KEYBOARD_CODE.D]) {
-            TheNextBigWave.player.act(TheNextBigWave.ACTION.WALK, TheNextBigWave.DIRECTION.RIGHT);
-            return;
-        }
-        if (keysPressed[fudge.KEYBOARD_CODE.W]) {
-            TheNextBigWave.player.act(TheNextBigWave.ACTION.JUMP);
-            return;
-        }
-        TheNextBigWave.player.act(TheNextBigWave.ACTION.IDLE);
     }
 })(TheNextBigWave || (TheNextBigWave = {}));
 //# sourceMappingURL=Main.js.map

@@ -6,7 +6,7 @@ var TheNextBigWave;
     let ACTION;
     (function (ACTION) {
         ACTION["IDLE"] = "Idle";
-        ACTION["WALK"] = "Walk";
+        ACTION["SURF"] = "Surf";
         ACTION["JUMP"] = "Jump";
     })(ACTION = TheNextBigWave.ACTION || (TheNextBigWave.ACTION = {}));
     let DIRECTION;
@@ -29,12 +29,16 @@ var TheNextBigWave;
         }
         static generateSprites(_coat) {
             this.spriteAnimation = {};
-            let movementMethod;
+            let surfingMethod;
             let sprite;
-            movementMethod = "Idle";
-            sprite = new fudgeaid.SpriteSheetAnimation(movementMethod, _coat);
-            sprite.generateByGrid(fudge.Rectangle.GET(4, 5, 36, 39), 1, 200, fudge.ORIGIN2D.BOTTOMCENTER, fudge.Vector2.X(10));
-            this.spriteAnimation[movementMethod] = sprite;
+            surfingMethod = "Idle";
+            sprite = new fudgeaid.SpriteSheetAnimation(surfingMethod, _coat);
+            sprite.generateByGrid(fudge.Rectangle.GET(23, 58, 91, 71), 1, 200, fudge.ORIGIN2D.BOTTOMCENTER, fudge.Vector2.X(10));
+            this.spriteAnimation[surfingMethod] = sprite;
+            surfingMethod = "Surf";
+            sprite = new fudgeaid.SpriteSheetAnimation(surfingMethod, _coat);
+            sprite.generateByGrid(fudge.Rectangle.GET(23, 47, 91, 82), 2, 200, fudge.ORIGIN2D.BOTTOMCENTER, fudge.Vector2.X(13));
+            this.spriteAnimation[surfingMethod] = sprite;
         }
         show(_action) {
             for (let child of this.getChildren())
@@ -46,7 +50,7 @@ var TheNextBigWave;
                 case ACTION.IDLE:
                     this.speed.x = 0;
                     break;
-                case ACTION.WALK:
+                case ACTION.SURF:
                     let direction = (_direction == DIRECTION.RIGHT ? 1 : -1);
                     this.speed.x = Player.speedMax.x;
                     this.cmpTransform.local.rotation = fudge.Vector3.Y(90 - 90 * direction);
