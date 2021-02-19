@@ -12,7 +12,7 @@ namespace TheNextBigWave {
         private static spriteAnimation: fudgeaid.SpriteSheetAnimations;
         private sprite: fudgeaid.NodeSprite;
 
-        public constructor (_name: string) {
+        public constructor (_name: string, _translateX: number, _translateY: number) {
             super(_name);
 
             this.sprite = new fudgeaid.NodeSprite("Sprite");
@@ -22,8 +22,7 @@ namespace TheNextBigWave {
             this.hitbox = this.createHitbox();
             this.appendChild(this.hitbox);
 
-            fudge.Loop.addEventListener(fudge.EVENT.LOOP_FRAME, this.updateShark);
-            fudge.Loop.addEventListener(fudge.EVENT.LOOP_FRAME, this.updateGull);
+            fudge.Loop.addEventListener(fudge.EVENT.LOOP_FRAME, this.update);
         }
 
         public static generateSprites(_coat: fudge.CoatTextured): void {
@@ -54,24 +53,32 @@ namespace TheNextBigWave {
         public movement(_type: TYPE): void {
             switch (_type) {
                 case TYPE.SHARK:
-                    this.speed.x = 10;
+                    this.speed.x = 0.1;
                 case TYPE.SEAGULL:
-                    this.speed.x = 20;
+                    this.speed.x = 0.2;
                 }
             this.show(_type);
         }
 
-        private updateShark = (_event: fudge.Eventƒ): void => {
+        private update = (_event: fudge.Eventƒ): void => {
             this.broadcastEvent(new CustomEvent("showNext"));
       
             this.checkCollision(player);
             this.movement(TYPE.SHARK);
+
+            if ((this.mtxWorld.translation.x - player.mtxWorld.translation.x) > 5 ) {
+                this.spawnNewEnemy();
+            }
         }
 
-        private updateGull = (_event: fudge.Eventƒ): void => {
-            this.broadcastEvent(new CustomEvent("showNext"));
-      
-            this.checkCollision(player);
-            this.movement(TYPE.SEAGULL);
+        private spawnNewEnemy(): void {
+            let enemy: Enemy;
+            let charPosition: number = player.mtxWorld.translation.x;
+            if (Math.random() < 0.5){
+                enemy = new Enemy("Shark", (charPosition + 3), -0.2);
+            } else {
+                enemy = new Enemy("Seagull", (charPosition + 3), 0.25);
+            }
+            game.appendChild(enemy);
         }
 }}
