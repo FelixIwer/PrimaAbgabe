@@ -10,3 +10,6 @@ https://github.com/FelixIwer/PrimaAbgabe/tree/main/Konzept
 
 Pages Link WS 19/20:
 https://felixiwer.github.io/LastSuperBowl/
+
+Link zu nicht abgegebener Abgabe 19/20:
+https://github.com/FelixIwer/LastSuperBowl
