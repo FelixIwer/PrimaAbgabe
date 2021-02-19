@@ -18,6 +18,7 @@ var TheNextBigWave;
                 floorDistance += 0.36;
                 this.appendChild(_waves);
             }
+            return TheNextBigWave.world;
         }
     }
     TheNextBigWave.World = World;

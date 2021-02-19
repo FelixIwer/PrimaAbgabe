@@ -13,7 +13,7 @@ namespace TheNextBigWave {
             this.createWaves(wave);
         }
 
-        private createWaves(_waves: Waves): void {
+        private createWaves(_waves: Waves): fudge.Node {
             let floorDistance: number = 0;
 
             for (let index: number = 0; index < 9; index++) {
@@ -23,6 +23,7 @@ namespace TheNextBigWave {
 
                 this.appendChild(_waves);
             }
+            return world;
         }
     }
 }

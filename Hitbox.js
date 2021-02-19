@@ -29,21 +29,22 @@ var TheNextBigWave;
             return rect;
         }
         checkCollision() {
-            // this.checkCollisionEnemy();
+            this.checkCollisionEnemy();
         }
-        // private checkCollisionEnemy(): void {
-        //     for (let child of game.getChildren()) {
-        //         if (child.name == "Enemy") {
-        //             let hitbox = Hitbox;
-        //             hitbox = (<Enemy>child).hitbox;
-        //             if (this.hitDetected(hitbox)) {
-        //                 // Player nimmt Schaden
-        //             }else {
-        //                 continue;
-        //             }
-        //         }
-        //     }
-        // }
+        checkCollisionEnemy() {
+            for (let child of TheNextBigWave.game.getChildren()) {
+                if (child.name == "Enemy") {
+                    let hitbox = Hitbox;
+                    hitbox = child.hitbox;
+                    if (this.hitDetected(hitbox)) {
+                        // Player nimmt Schaden
+                    }
+                    else {
+                        continue;
+                    }
+                }
+            }
+        }
         hitDetected(hitbox) {
             let hit = false;
             let rectOfThis = this.getRectWorld();

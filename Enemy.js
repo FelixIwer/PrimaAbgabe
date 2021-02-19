@@ -6,17 +6,11 @@ var TheNextBigWave;
     class Enemy extends TheNextBigWave.MovingObject {
         constructor(_name) {
             super(_name);
-            this.update = (_event) => {
-                this.broadcastEvent(new CustomEvent("showNext"));
-                this.checkCollision(TheNextBigWave.waves);
-                this.checkCollision(TheNextBigWave.world);
-            };
             this.sprite = new fudgeaid.NodeSprite("Sprite");
             this.sprite.setFrameDirection(1);
             this.sprite.setAnimation(Enemy.spriteAnimation["Idle"]);
             this.hitbox = this.createHitbox();
             this.appendChild(this.hitbox);
-            ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, this.update);
         }
         static generateSprites(_coat) {
             this.spriteAnimation = {};

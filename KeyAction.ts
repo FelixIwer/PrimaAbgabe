@@ -17,7 +17,16 @@ namespace TheNextBigWave {
         startGame = true;
         document.addEventListener("keydown", handleKeyboard);
         document.addEventListener("keyup", handleKeyboard);
+        let menu: HTMLElement = document.querySelector("div#Start");
+        menu.style.visibility = "hidden";
     }
+
+    export function end(): void {
+        let domOver: HTMLElement = document.querySelector("div#Over");
+        domOver.style.visibility = "visible";
+        window.removeEventListener("keydown", handleKeyboard);
+        window.removeEventListener("keyup", handleKeyboard);
+      }
 
     async function waitForKeyPress(_code: fudge.KEYBOARD_CODE): Promise<void> {
         return new Promise(_resolve => {
@@ -33,7 +42,7 @@ namespace TheNextBigWave {
 
     export function handleSound(_event: KeyboardEvent): void {
         if (startGame == true) {
-            Sound.BackgroundSound();
+            sounds.BackgroundSound(true);
         }
     }
 

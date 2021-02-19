@@ -12,8 +12,17 @@ var TheNextBigWave;
         startGame = true;
         document.addEventListener("keydown", handleKeyboard);
         document.addEventListener("keyup", handleKeyboard);
+        let menu = document.querySelector("div#Start");
+        menu.style.visibility = "hidden";
     }
     TheNextBigWave.start = start;
+    function end() {
+        let domOver = document.querySelector("div#Over");
+        domOver.style.visibility = "visible";
+        window.removeEventListener("keydown", handleKeyboard);
+        window.removeEventListener("keyup", handleKeyboard);
+    }
+    TheNextBigWave.end = end;
     async function waitForKeyPress(_code) {
         return new Promise(_resolve => {
             window.addEventListener("keydown", hndKeyDown);
@@ -27,7 +36,7 @@ var TheNextBigWave;
     }
     function handleSound(_event) {
         if (startGame == true) {
-            TheNextBigWave.Sound.BackgroundSound();
+            TheNextBigWave.sounds.BackgroundSound(true);
         }
     }
     TheNextBigWave.handleSound = handleSound;

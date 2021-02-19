@@ -1,0 +1,15 @@
+div#Start, div#Finish {
+    display: inline-block;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+}
+
+div#Finish {
+    visibility: hidden;
+    font-size: 3em;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    top: 25%;
+    left: 50%;
+}

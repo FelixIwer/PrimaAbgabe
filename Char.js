@@ -26,7 +26,6 @@ var TheNextBigWave;
                 this.speed.y += this.gravity.y * timeFrame;
                 let distance = ƒ.Vector3.SCALE(this.speed, timeFrame);
                 this.cmpTransform.local.translate(distance);
-                this.checkCollision(TheNextBigWave.waves);
                 this.checkCollision(TheNextBigWave.world);
                 this.hitbox.checkCollision();
             };
@@ -34,8 +33,7 @@ var TheNextBigWave;
             this.sprite.setFrameDirection(1);
             this.sprite.setAnimation(Player.spriteAnimation["Idle"]);
             this.appendChild(this.sprite);
-            this.addComponent(new fudge.ComponentTransform());
-            // this.cmpTransform.local.rotateZ(15);
+            this.hitbox = this.createHitbox();
             ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, this.update);
         }
         static generateSprites(_coat) {

@@ -34,8 +34,8 @@ namespace TheNextBigWave {
           this.sprite.setAnimation(<fudgeaid.SpriteSheetAnimation>Player.spriteAnimation["Idle"]);
           this.appendChild(this.sprite);
 
-          this.addComponent(new fudge.ComponentTransform());
-          // this.cmpTransform.local.rotateZ(15);
+          this.hitbox = this.createHitbox();
+
           ƒ.Loop.addEventListener(ƒ.EVENT.LOOP_FRAME, this.update);
       }
 
@@ -101,7 +101,6 @@ namespace TheNextBigWave {
         let distance: ƒ.Vector3 = ƒ.Vector3.SCALE(this.speed, timeFrame);
         this.cmpTransform.local.translate(distance);
   
-        this.checkCollision(waves);
         this.checkCollision(world);
         this.hitbox.checkCollision();
       }

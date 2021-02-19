@@ -16,8 +16,6 @@ namespace TheNextBigWave {
 
             this.hitbox = this.createHitbox();
             this.appendChild(this.hitbox);
-
-            ƒ.Loop.addEventListener(ƒ.EVENT.LOOP_FRAME, this.update);
         }
 
         public static generateSprites(_coat: fudge.CoatTextured): void {
@@ -38,12 +36,6 @@ namespace TheNextBigWave {
             hitbox.cmpTransform.local.scaleY(0.5);
             this.hitbox = hitbox;
             return hitbox;
-        }
-
-        private update = (_event: ƒ.Eventƒ): void => {
-            this.broadcastEvent(new CustomEvent("showNext"));
-            this.checkCollision(waves);
-            this.checkCollision(world);
         }
     }
 }

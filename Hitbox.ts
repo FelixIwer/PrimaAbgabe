@@ -37,22 +37,22 @@ namespace TheNextBigWave {
     }
 
     public checkCollision(): void{
-        // this.checkCollisionEnemy();
+        this.checkCollisionEnemy();
     }
 
-    // private checkCollisionEnemy(): void {
-    //     for (let child of game.getChildren()) {
-    //         if (child.name == "Enemy") {
-    //             let hitbox = Hitbox;
-    //             hitbox = (<Enemy>child).hitbox;
-    //             if (this.hitDetected(hitbox)) {
-    //                 // Player nimmt Schaden
-    //             }else {
-    //                 continue;
-    //             }
-    //         }
-    //     }
-    // }
+    private checkCollisionEnemy(): void {
+        for (let child of game.getChildren()) {
+            if (child.name == "Enemy") {
+                let hitbox = Hitbox;
+                hitbox = (<Enemy>child).hitbox;
+                if (this.hitDetected(hitbox)) {
+                    // Player nimmt Schaden
+                }else {
+                    continue;
+                }
+            }
+        }
+    }
 
     private hitDetected(hitbox: Hitbox): boolean {
         let hit: boolean = false;

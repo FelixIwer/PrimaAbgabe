@@ -10,29 +10,28 @@ namespace TheNextBigWave {
     export let enemy: Enemy;
     export let world: World;
     export let waves: Waves;
+    export let sounds: Sound;
 
     async function MainGame(_event: Event): Promise<void> {
         const canvas: HTMLCanvasElement = document.querySelector("canvas");
 
-        Sound.init();
+        await createPlayerSpriteSheet();
+        await createEnemySpriteSheet();
 
         document.addEventListener("keydown", handleSound);
         document.addEventListener("keyup", handleSound);
         
+        sounds = new Sound();
+
         game = new fudge.Node("Game");
 
         world = new World("World");
-        game.appendChild(world);
+        game.addChild(world);
 
-        await createPlayerSpriteSheet();
         player = new Player("Player");
-        game.appendChild(player);
+        game.addChild(player);
 
-        await createEnemySpriteSheet();
-        enemy = new Enemy("Enemy");
-        game.appendChild(enemy);
-
-        game.appendChild(new BackgroundPicture("BackgroundPicture"));
+        game.addChild(new BackgroundPicture("BackgroundPicture"));
 
         //Camera Setup
         let cmpCamera: fudge.ComponentCamera = new fudge.ComponentCamera();
@@ -47,24 +46,26 @@ namespace TheNextBigWave {
         fudge.Loop.addEventListener(fudge.EVENT.LOOP_FRAME, update);
         fudge.Loop.start(fudge.LOOP_MODE.TIME_GAME, 60);
         viewport.draw();
-    }
 
-    function update(_event: fudge.Eventƒ): void {
-        processInput();
-        viewport.draw();
-    }
+        start();
 
-    async function createPlayerSpriteSheet(): Promise<void> {
-        let txtPlayer: fudge.TextureImage = new fudge.TextureImage();
-        await txtPlayer.load("./Screens/SurferBoy.png");
-        let coatSprite: fudge.CoatTextured = new fudge.CoatTextured(null, txtPlayer);
-        Player.generateSprites(coatSprite);
-    }
+        function update(_event: fudge.Eventƒ): void {
+            processInput();
+            viewport.draw();
+        }
 
-    async function createEnemySpriteSheet(): Promise<void> {
-        let txtEnemy: fudge.TextureImage = new fudge.TextureImage();
-        await txtEnemy.load("./Screens/Enemys.png");
-        let coatSprite: fudge.CoatTextured = new fudge.CoatTextured(null, txtEnemy);
-        Enemy.generateSprites(coatSprite);
-    }    
+        async function createPlayerSpriteSheet(): Promise<void> {
+            let txtPlayer: fudge.TextureImage = new fudge.TextureImage();
+            await txtPlayer.load("./Screens/SurferBoy.png");
+            let coatSprite: fudge.CoatTextured = new fudge.CoatTextured(null, txtPlayer);
+            Player.generateSprites(coatSprite);
+        }
+
+        async function createEnemySpriteSheet(): Promise<void> {
+            let txtEnemy: fudge.TextureImage = new fudge.TextureImage();
+            await txtEnemy.load("./Screens/Enemys.png");
+            let coatSprite: fudge.CoatTextured = new fudge.CoatTextured(null, txtEnemy);
+            Enemy.generateSprites(coatSprite);
+        }
+}
 }

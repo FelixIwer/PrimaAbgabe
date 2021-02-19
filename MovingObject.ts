@@ -12,7 +12,7 @@ namespace TheNextBigWave {
 
     public checkCollision(_checkCollision: ƒ.Node): void {
         for (let waves of _checkCollision.getChildren()) {
-          if (waves.name == "Waves") {
+          if (waves.name == "World") {
             let rect: ƒ.Rectangle = (<Waves>waves).getRectWorld();
             let hit: boolean = rect.isInside(this.cmpTransform.local.translation.toVector2());
             if (hit) {
