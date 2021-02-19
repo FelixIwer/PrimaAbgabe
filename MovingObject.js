@@ -5,7 +5,7 @@ var TheNextBigWave;
     class MovingObject extends fudge.Node {
         constructor(_name) {
             super(_name);
-            this.speed = ƒ.Vector3.ZERO();
+            this.speed = fudge.Vector3.ZERO();
             this.addComponent(new fudge.ComponentTransform());
         }
         checkCollision(_checkCollision) {

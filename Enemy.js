@@ -3,14 +3,31 @@ var TheNextBigWave;
 (function (TheNextBigWave) {
     var fudge = FudgeCore;
     var fudgeaid = FudgeAid;
+    let TYPE;
+    (function (TYPE) {
+        TYPE["SHARK"] = "Shark";
+        TYPE["SEAGULL"] = "Seagull";
+    })(TYPE = TheNextBigWave.TYPE || (TheNextBigWave.TYPE = {}));
     class Enemy extends TheNextBigWave.MovingObject {
         constructor(_name) {
             super(_name);
+            this.updateShark = (_event) => {
+                this.broadcastEvent(new CustomEvent("showNext"));
+                this.checkCollision(TheNextBigWave.player);
+                this.movement(TYPE.SHARK);
+            };
+            this.updateGull = (_event) => {
+                this.broadcastEvent(new CustomEvent("showNext"));
+                this.checkCollision(TheNextBigWave.player);
+                this.movement(TYPE.SEAGULL);
+            };
             this.sprite = new fudgeaid.NodeSprite("Sprite");
             this.sprite.setFrameDirection(1);
             this.sprite.setAnimation(Enemy.spriteAnimation["Idle"]);
             this.hitbox = this.createHitbox();
             this.appendChild(this.hitbox);
+            fudge.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, this.updateShark);
+            fudge.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, this.updateGull);
         }
         static generateSprites(_coat) {
             this.spriteAnimation = {};
@@ -27,6 +44,19 @@ var TheNextBigWave;
             hitbox.cmpTransform.local.scaleY(0.5);
             this.hitbox = hitbox;
             return hitbox;
+        }
+        show(_type) {
+            for (let child of this.getChildren())
+                child.activate(child.name == _type);
+        }
+        movement(_type) {
+            switch (_type) {
+                case TYPE.SHARK:
+                    this.speed.x = 10;
+                case TYPE.SEAGULL:
+                    this.speed.x = 20;
+            }
+            this.show(_type);
         }
     }
     TheNextBigWave.Enemy = Enemy;

@@ -20,7 +20,7 @@ namespace TheNextBigWave {
       // private static gravity: fudge.Vector2 = fudge.Vector2.Y(-3);
       
       public speed: fudge.Vector3 = fudge.Vector3.ZERO();
-      public gravity: ƒ.Vector2 = ƒ.Vector2.Y(-3);
+      public gravity: fudge.Vector2 = fudge.Vector2.Y(-3);
       public direction: DIRECTION;
       public hitbox: Hitbox;
       
@@ -36,7 +36,7 @@ namespace TheNextBigWave {
 
           this.hitbox = this.createHitbox();
 
-          ƒ.Loop.addEventListener(ƒ.EVENT.LOOP_FRAME, this.update);
+          fudge.Loop.addEventListener(fudge.EVENT.LOOP_FRAME, this.update);
       }
 
       public static generateSprites(_coat: fudge.CoatTextured): void {
@@ -96,9 +96,9 @@ namespace TheNextBigWave {
       private update = (_event: fudge.Eventƒ): void => {
         this.broadcastEvent(new CustomEvent("showNext"));
   
-        let timeFrame: number = ƒ.Loop.timeFrameGame / 1000;
+        let timeFrame: number = fudge.Loop.timeFrameGame / 1000;
         this.speed.y += this.gravity.y * timeFrame;
-        let distance: ƒ.Vector3 = ƒ.Vector3.SCALE(this.speed, timeFrame);
+        let distance: fudge.Vector3 = fudge.Vector3.SCALE(this.speed, timeFrame);
         this.cmpTransform.local.translate(distance);
   
         this.checkCollision(world);

@@ -19,12 +19,12 @@ var TheNextBigWave;
             super(_name);
             // private static gravity: fudge.Vector2 = fudge.Vector2.Y(-3);
             this.speed = fudge.Vector3.ZERO();
-            this.gravity = ƒ.Vector2.Y(-3);
+            this.gravity = fudge.Vector2.Y(-3);
             this.update = (_event) => {
                 this.broadcastEvent(new CustomEvent("showNext"));
-                let timeFrame = ƒ.Loop.timeFrameGame / 1000;
+                let timeFrame = fudge.Loop.timeFrameGame / 1000;
                 this.speed.y += this.gravity.y * timeFrame;
-                let distance = ƒ.Vector3.SCALE(this.speed, timeFrame);
+                let distance = fudge.Vector3.SCALE(this.speed, timeFrame);
                 this.cmpTransform.local.translate(distance);
                 this.checkCollision(TheNextBigWave.world);
                 this.hitbox.checkCollision();
@@ -34,7 +34,7 @@ var TheNextBigWave;
             this.sprite.setAnimation(Player.spriteAnimation["Idle"]);
             this.appendChild(this.sprite);
             this.hitbox = this.createHitbox();
-            ƒ.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, this.update);
+            fudge.Loop.addEventListener("loopFrame" /* LOOP_FRAME */, this.update);
         }
         static generateSprites(_coat) {
             this.spriteAnimation = {};

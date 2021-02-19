@@ -4,7 +4,7 @@ namespace TheNextBigWave {
     export class Waves extends fudge.Node {
         private static readonly mQuad: fudge.MeshQuad = new fudge.MeshQuad();
         private static txtWavesPicture: fudge.TextureImage = new fudge.TextureImage("./Screens/Wave.png");
-        private static readonly pivot: ƒ.Matrix4x4 = ƒ.Matrix4x4.TRANSLATION(ƒ.Vector3.Y(1.4));
+        private static readonly pivot: fudge.Matrix4x4 = fudge.Matrix4x4.TRANSLATION(fudge.Vector3.Y(1.4));
 
         public constructor(_name: string, _distance: number) {
             super(_name);
@@ -22,16 +22,16 @@ namespace TheNextBigWave {
             this.cmpTransform.local.translateX(_distance);
         }
 
-        public getRectWorld(): ƒ.Rectangle {
-            let rect: ƒ.Rectangle = ƒ.Rectangle.GET(0, 0, 100, 100);
-            let topleft: ƒ.Vector3 = new ƒ.Vector3(-0.5, 0.5, 0);
-            let bottomright: ƒ.Vector3 = new ƒ.Vector3(0.5, -0.5, 0);
+        public getRectWorld(): fudge.Rectangle {
+            let rect: fudge.Rectangle = fudge.Rectangle.GET(0, 0, 100, 100);
+            let topleft: fudge.Vector3 = new fudge.Vector3(-0.5, 0.5, 0);
+            let bottomright: fudge.Vector3 = new fudge.Vector3(0.5, -0.5, 0);
             
-            let mtxResult: ƒ.Matrix4x4 = ƒ.Matrix4x4.MULTIPLICATION(this.mtxWorld, Waves.pivot);
+            let mtxResult: fudge.Matrix4x4 = fudge.Matrix4x4.MULTIPLICATION(this.mtxWorld, Waves.pivot);
             topleft.transform(mtxResult, true);
             bottomright.transform(mtxResult, true);
       
-            let size: ƒ.Vector2 = new ƒ.Vector2(bottomright.x - topleft.x, bottomright.y - topleft.y);
+            let size: fudge.Vector2 = new fudge.Vector2(bottomright.x - topleft.x, bottomright.y - topleft.y);
             rect.position = topleft.toVector2();
             rect.size = size;
       
